@@ -39,7 +39,7 @@ class AbstractMessage(models.Model):
 class Message(AbstractMessage):
     received = models.BooleanField()
     seen = models.BooleanField()
-    user = models.ForeignKey(User, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
 
 class GroupMessage(AbstractMessage):
