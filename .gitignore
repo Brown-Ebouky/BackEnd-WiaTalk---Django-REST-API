@@ -205,3 +205,6 @@ media/
 **/migrations/**
 !**/migrations
 !**/migrations/__init__.py
+
+#Ignore database
+backend_wiatalk/db.sqlite3
