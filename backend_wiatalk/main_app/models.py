@@ -39,22 +39,31 @@ class AbstractMessage(models.Model):
 class Message(AbstractMessage):
     received = models.BooleanField()
     seen = models.BooleanField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message_user_1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='message_user_1')
+    message_user_2 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='message_user_2')
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
 
 class GroupMessage(AbstractMessage):
     groupChat = models.ForeignKey(GroupChat, on_delete=models.CASCADE)
     users_rec = models.ManyToManyField(User, related_name="users_rec")
     users_seen = models.ManyToManyField(User, related_name="users_seen")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return "A message of the group"
 
-class CallHistory(models.Model):
+class Call(models.Model):
     duration = models.TimeField()
     timestamp = models.DateTimeField()
     videoCall = models.BooleanField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    call_user_1 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='call_user_1')
+    call_user_2 = models.ForeignKey(User, on_delete=models.CASCADE, related_name='call_user_2')
+
+class GroupCall(models.Model):
+    duration = models.TimeField()
+    timestamp = models.DateTimeField()
+    videoCall = models.BooleanField()
+    participants = models.ManyToManyField(User, related_name='participants')
 
 
 
